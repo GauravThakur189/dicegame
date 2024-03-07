@@ -1,25 +1,36 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import Rules from './Rules';
 
-const RollDice = () => {
 
-    const [diceRoll, setdiceRoll] = useState();
+
+const RollDice = ({diceRoll ,handleClick}) => {
+
+    
+    const [isPopupOpen, setPopupOpen] = useState(false);
+
+  const openPopup = () => {
+    setPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setPopupOpen(false);
+  };
     
 
-    const handleClick = () => {
-        // Generate a random number between 1 and 6 (inclusive)
-        const  rollValue = Math.floor(
-            Math.random() * (Math.ceil(6) - Math.floor(1) + 1) + Math.floor(1),
-        )
-        setdiceRoll(rollValue);
-    }
+    
+    
   return (
+  
     <Thala>
     <div className='dice'
     onClick={handleClick}>
         <img src={`/dice${diceRoll}.png`} alt='dice1' />
     </div>
     <p> Click on Dice to Roll</p>
+    <button onClick={openPopup}> Rules To Play The Game</button>
+    {isPopupOpen && <Rules onClose={closePopup}/>}
+    
     </Thala>
   )
 }
